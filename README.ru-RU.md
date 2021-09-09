@@ -18,8 +18,10 @@
 
 ## Демо
 Общедоступная группа netAIS для тестовых целей:  
-**2q6q4phwaduy4mly2mrujxlhpjg7el7z2b4u6s7spghylcd6bv3eqvyd.onion**  Этот адрес является умолчальным в настройках плагина.
+**2q6q4phwaduy4mly2mrujxlhpjg7el7z2b4u6s7spghylcd6bv3eqvyd.onion**  Этот адрес является умолчальным в настройках плагина.  
+![screenshot](screenshots/s2.png)   
 Все активные участники группы видны в [демонстрационной версии](http://130.61.159.53/map/) [GaladrielMap](http://galadrielmap.hs-yachten.at/).
+![screenshot](screenshots/s1.jpg)   
 
 ## Совместимость
 Сервер Signal K 
@@ -41,6 +43,7 @@ HiddenServicePort 80 localhost:3100
 ```
 sudo cat /var/lib/tor/hidden_service_netAIS/hostname  
 ```
+![screenshot](screenshots/s3.png)   
 Не нужно настраивать скрытый сервис TOR, если вы не собираетесь держать свою группу netAIS, а хотите быть только членом других групп. Но сам TOR, конечно, должен быть.
 
 ## Использование

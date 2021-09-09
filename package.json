@@ -7,12 +7,34 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Vladimir Kalachikhin <galadrielmap@gmail.com>",
-  "license": "CC BY-SA",
+  "license": "CC BY-SA-4.0",
   "keywords": [
     "signalk-node-server-plugin",
     "signalk-category-ais"
   ],
+  "homepage": "https://github.com/VladimirKalachikhin/netAIS-Signal-K#readme",
+  "bugs": {
+  	  "url": "https://github.com/VladimirKalachikhin/netAIS-Signal-K/issues",
+      "email": "galadrielmap@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VladimirKalachikhin/netAIS-Signal-K.git"
+  },
+  "funding": [
+    {
+      "type" : "individual",
+      "url" : "https://paypal.me/VladimirKalachikhin"
+    },
+    {
+      "type" : "individual",
+      "url" : "https://yasobe.ru/na/galadrielmap"
+    }
+  ],
+  "files": [
+  	"screenshots/*"
+  ],
   "dependencies": {
-    "socks-proxy-agent": "^6.0.0"
+    "socks-proxy-agent": ">=6.0.0"
   }
 }
