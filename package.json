@@ -1,6 +1,6 @@
 {
   "name": "netais",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "SignalK netAIS implementation",
   "main": "index.js",
   "scripts": {

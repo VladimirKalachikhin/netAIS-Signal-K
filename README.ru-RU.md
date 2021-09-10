@@ -1,11 +1,11 @@
 # netAIS плагин для Signal K[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 ## v. 0.0
-Обмен AIS-подобными сообщениями с координатами и сопутствующей информацией через Интрнет между участниками выделенной группы. Для взаимодействия не требуется интернет-сервер с реальным адресом.
+Обмен AIS-подобными сообщениями с координатами и сопутствующей информацией через Интрнет между участниками выделенной частной группы. Для взаимодействия не требуется интернет-сервер с реальным адресом.
 
 Удобно для организации коллективного плавания, соревнований, рыбалки.
 
-![scheme](screenshots/art.png)   
+![scheme_netAIS](screenshots/art.png)   
 
 Плагин использует [TOR](torproject.org) как среду коммуникации, и функционирует и через мобильный интернет и через публичные точки доступа wi-fi без дополнительных настроек.  
 
@@ -19,16 +19,20 @@
 ## Демо
 Общедоступная группа netAIS для тестовых целей:  
 **2q6q4phwaduy4mly2mrujxlhpjg7el7z2b4u6s7spghylcd6bv3eqvyd.onion**  Этот адрес является умолчальным в настройках плагина.  
-![screenshot](screenshots/s2.png)   
-Все активные участники группы видны в [демонстрационной версии](http://130.61.159.53/map/) [GaladrielMap](http://galadrielmap.hs-yachten.at/).
-![screenshot](screenshots/s1.jpg)   
+![экран настройки выделенных групп](screenshots/s2.png)   
+Все активные участники группы видны в [демонстрационной версии](http://130.61.159.53/map/) [GaladrielMap](http://galadrielmap.hs-yachten.at/).  
+![использование](screenshots/s1.jpg)   
 
 ## Совместимость
 Сервер Signal K 
 
 ## Установка и конфигурирование:
-Установите плагин обычным образом из Signal K Appstore.   
-В меню Server -> Plugin Config настройте плагин. Не забывайте нажимать Submit для сохранения настроек.
+У вас должна быть установлена [служба TOR](https://www.torproject.org/docs/tor-manual.html.en).  
+Установите плагин с именем **netais** обычным образом из Signal K Appstore.   
+![appstore_screenshot](screenshots/s4.png)   
+Перезапустите Signal K.  
+В меню Server -> Plugin Config настройте плагин.   
+Не забывайте нажимать Submit для сохранения настроек.
 
 ### Скрытый сервис TOR
 

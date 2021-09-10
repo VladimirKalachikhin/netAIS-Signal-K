@@ -20,17 +20,20 @@ The client calls to the server with spatial and other info in AIS-like format. S
 ## Demo
 Public group for testing:  
 **2q6q4phwaduy4mly2mrujxlhpjg7el7z2b4u6s7spghylcd6bv3eqvyd.onion**  This address are default on client configuration interface.  
-![screenshot](screenshots/s2.png)   
-All active group members are visible on  [GaladrielMap](http://galadrielmap.hs-yachten.at/) [Live demo](http://130.61.159.53/map/).  
-![screenshot](screenshots/s1.jpg)   
+![private_group_config_screenshot](screenshots/s2.png)   
+All active group members are visible on  [GaladrielMap](http://galadrielmap.hs-yachten.at/) [Live demo](http://130.61.159.53/map/).   
+![usage_screenshot](screenshots/s1.jpg)   
 
 ## Compatibility
 Signal K server. 
 
 ## Install&configure:
 You mast have [TOR service](https://www.torproject.org/docs/tor-manual.html.en) installed.  
-Install plugin from Signal K Appstore.  
-Use Server -> Plugin Config menu to configure plugin. Press Submit to save changes.
+Install plugin from Signal K Appstore as **netais**.  
+![appstore_screenshot](screenshots/s4.png)   
+Restart Signal K,  
+Use Server -> Plugin Config menu to configure plugin.   
+Press Submit to save changes.
 
 ### TOR hidden service
 [Configure TOR hidden service](https://www.torproject.org/docs/tor-onion-service.html.en) to serve localhost:3100 (default) addres. Simplest way to it is just adding  
@@ -43,7 +46,7 @@ After restart TOR, get address you hidden service by
 ```
 sudo cat /var/lib/tor/hidden_service_netAIS/hostname  
 ```
-![screenshot](screenshots/s3.png)   
+![hidden_server_config_screenshot](screenshots/s3.png)   
 It's no need if you want to be a group member only. But working TOR must be have.
 
 ## Usage
