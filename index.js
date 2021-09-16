@@ -135,6 +135,7 @@ module.exports = function (app) {
 		vehicle.beam = app.getSelfPath('design.beam') ? app.getSelfPath('design.beam').value : undefined;
 		vehicle.netAIS = true;
 		//app.debug('vehicle at start',vehicle);
+		
 		function updSelf(position){
 			vehicle.status = app.getSelfPath('navigation.state') ? app.getSelfPath('navigation.state').value : undefined;
 			vehicle.speed = app.getSelfPath('navigation.speedOverGround') ? app.getSelfPath('navigation.speedOverGround').value : undefined;
@@ -165,7 +166,7 @@ module.exports = function (app) {
 				},
 				{
 					path: 'navigation.courseOverGroundTrue',
-					value: vessel.course * Math.PI / 180
+					value: vessel.course ? vessel.course * Math.PI / 180 : vessel.heading * Math.PI / 180
 				},
 				{
 					path: 'navigation.speedOverGround',
@@ -173,7 +174,7 @@ module.exports = function (app) {
 				},
 				{
 					path: 'navigation.headingTrue',
-					value: vessel.heading * Math.PI / 180
+					value: vessel.heading ? vessel.heading * Math.PI / 180 : vessel.course * Math.PI / 180
 				},
 				{
 					path: 'navigation.datetime',
