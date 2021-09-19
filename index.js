@@ -143,6 +143,8 @@ module.exports = function (app) {
 			vehicle.lat = position.latitude;
 			vehicle.course = app.getSelfPath('navigation.courseOverGroundTrue') ? app.getSelfPath('navigation.courseOverGroundTrue').value *180/Math.PI : undefined;
 			vehicle.heading = app.getSelfPath('navigation.headingTrue') ? Math.round(app.getSelfPath('navigation.headingTrue').value *180/Math.PI) : undefined;
+			vehicle.destination = app.getSelfPath('navigation.destination.commonName') ? app.getSelfPath('navigation.destination.commonName').value : undefined;
+			vehicle.eta = app.getSelfPath('navigation.destination.eta') ? app.getSelfPath('navigation.destination.eta').value : undefined;
 			vehicle.timestamp = app.getSelfPath('navigation.datetime') ? Math.round(new Date(app.getSelfPath('navigation.datetime').value).getTime()/1000) : Math.round(new Date().getTime()/1000); 	// navigation.datetime -- строка iso-8601
 			if(vehicle.lon && vehicle.lat) return true;
 			else return false
@@ -185,6 +187,14 @@ module.exports = function (app) {
 					value: vessel.status
 				},
 				{
+					path: 'navigation.destination.commonName',
+					value: vessel.destination
+				},
+				{
+					path: 'navigation.destination.eta',
+					value: vessel.eta
+				},
+				{
 					path: 'design.aisShipType',
 					value: {id: vessel.shiptype,name : vessel.shiptype_text} 	// 
 				},
@@ -207,6 +217,10 @@ module.exports = function (app) {
 				{
 					path: 'design.beam',
 					value: vessel.beam
+				},
+				{
+					path: 'communication',
+					value:{netAIS: true}
 				},
 			];
 			//app.debug('values BEFORE ',values);
