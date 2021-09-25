@@ -1,13 +1,13 @@
 {
   "name": "netais",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Exchange AIS-like messages via the Internet to watch position members of your private group. SignalK implementation.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Vladimir Kalachikhin <galadrielmap@gmail.com>",
-  "license": "CC BY-SA-4.0",
+  "license": "CC-BY-SA-4.0",
   "keywords": [
     "signalk-node-server-plugin",
     "signalk-category-ais"
