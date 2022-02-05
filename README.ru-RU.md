@@ -1,6 +1,6 @@
 # netAIS плагин для Signal K[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-## v. 0.0
+## v. 0.1
 Обмен AIS-подобными сообщениями с координатами и сопутствующей информацией через Интрнет между участниками выделенной частной группы. Для взаимодействия не требуется интернет-сервер с реальным адресом.
 
 Удобно для организации коллективного плавания, соревнований, рыбалки.
@@ -37,7 +37,7 @@
 ### Скрытый сервис TOR
 
 [Настройте скрытый сервис TOR](https://2019.www.torproject.org/docs/tor-onion-service.html.en) на 
-адрес localhost:3100. Самый простой способ это сделать -- просто добавить строки  
+адрес localhost:3100. Самый простой способ это сделать -- это добавить строки  
 ```
 HiddenServiceDir /var/lib/tor/hidden_service_netAIS/   
 HiddenServicePort 80 localhost:3100  

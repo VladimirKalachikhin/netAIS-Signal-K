@@ -160,7 +160,7 @@ module.exports = function (app) {
 				//},
 				{
 					path: 'name',
-					value: vessel.shipname
+					value: {name: vessel.shipname}	// эта пурга непонятно с какой версии, но вроде, так -- правильно
 				},
 				{
 					path: 'navigation.position',
@@ -317,7 +317,7 @@ module.exports = function (app) {
 									const values = prepareDelta(netAISdata[vessel]);
 									//app.debug('Добавляется судно',netAISdata[vessel].shipname);
 									//app.debug('values AFTER ',values);
-									app.handleMessage('netAIS-plugin', {
+									app.handleMessage(plugin.id, {
 										context: 'vessels.urn:mrn:imo:mmsi:'+netAISdata[vessel].mmsi,
 										updates: [
 											{
@@ -384,7 +384,7 @@ module.exports = function (app) {
 					if(options.selfServer.selfMember && updSelf(app.getSelfPath('navigation.position').value)){ 	
 						for(const vessel in netAISserverData) {
 							const values = prepareDelta(netAISserverData[vessel]);
-							app.handleMessage('netAIS-plugin', {
+							app.handleMessage(plugin.id, {
 								context: 'vessels.urn:mrn:imo:mmsi:'+netAISserverData[vessel].mmsi,
 								updates: [
 									{
