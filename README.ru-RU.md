@@ -7,7 +7,7 @@
 
 ![scheme_netAIS](screenshots/art.png)   
 
-Плагин использует [TOR](torproject.org) как среду коммуникации, и функционирует и через мобильный интернет и через публичные точки доступа wi-fi без дополнительных настроек.  
+Плагин использует [TOR](https://ru.wikipedia.org/wiki/Tor) как среду коммуникации, и функционирует и через мобильный интернет и через публичные точки доступа wi-fi без дополнительных настроек.  
 
 ## Возможности
 * Создание одной выделенной группы
@@ -27,7 +27,7 @@
 Сервер Signal K 
 
 ## Установка и конфигурирование:
-У вас должна быть установлена [служба TOR](https://www.torproject.org/docs/tor-manual.html.en).  
+У вас должна быть установлена [служба TOR](https://community.torproject.org/onion-services/setup/install/).  
 Установите плагин с именем **netais** обычным образом из Signal K Appstore.   
 ![appstore_screenshot](screenshots/s4.png)   
 Перезапустите Signal K.  
@@ -36,7 +36,7 @@
 
 ### Скрытый сервис TOR
 
-[Настройте скрытый сервис TOR](https://2019.www.torproject.org/docs/tor-onion-service.html.en) на 
+[Настройте скрытый сервис TOR](https://community.torproject.org/onion-services/setup/) на 
 адрес localhost:3100. Самый простой способ это сделать -- это добавить строки  
 ```
 HiddenServiceDir /var/lib/tor/hidden_service_netAIS/   

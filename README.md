@@ -6,7 +6,7 @@ Exchange AIS-like messages via the Internet to watch position members of your pr
 Suitable for fishing, regatta and collective water recreation.  
 
 ![scheme](screenshots/art.png)   
-Software use [TOR](torproject.org) as a communication environment, so it works smoothly via mobile internet and public wi-fi.
+Software use [TOR](https://en.wikipedia.org/wiki/Tor_(network)) as a communication environment, so it works smoothly via mobile internet and public wi-fi.
 
 ## Features
 * Service one private group.
@@ -28,7 +28,7 @@ All active group members are visible on  [GaladrielMap](http://galadrielmap.hs-y
 Signal K server. 
 
 ## Install&configure:
-You mast have [TOR service](https://www.torproject.org/docs/tor-manual.html.en) installed.  
+You must have [TOR service](https://community.torproject.org/onion-services/setup/install/) installed.  
 Install plugin from Signal K Appstore as **netais**.  
 ![appstore_screenshot](screenshots/s4.png)   
 Restart Signal K,  
@@ -36,7 +36,7 @@ Use Server -> Plugin Config menu to configure plugin.
 Press Submit to save changes.
 
 ### TOR hidden service
-[Configure TOR hidden service](https://www.torproject.org/docs/tor-onion-service.html.en) to serve localhost:3100 (default) addres. Simplest way to it is just adding  
+[Configure TOR hidden service](https://community.torproject.org/onion-services/setup/) to serve localhost:3100 (default) addres. Simplest way to it is just adding  
 ```
 HiddenServiceDir /var/lib/tor/hidden_service_netAIS/   
 HiddenServicePort 80 localhost:3100  
