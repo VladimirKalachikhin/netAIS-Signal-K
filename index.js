@@ -114,6 +114,7 @@ module.exports = function (app) {
 //	var netAISserverURIs = ['flibustahezeous3.onion']; 	// массив серверов netAIS, с которыми будем общаться. Ибо, в отличии от php версии, netAISclient у нас один на всех, а не на каждый сервер
 	
 	plugin.start = function (options, restartPlugin) {
+
 	// netAIS client
 		//app.debug('options',options);
 		const http = require('http');
@@ -124,15 +125,15 @@ module.exports = function (app) {
 		app.debug('netAIS client started');
 		// Сведения о себе для передачи
 		var vehicle = {};
-		vehicle.shipname = app.getSelfPath('name') ? app.getSelfPath('name').value : undefined;
-		vehicle.mmsi = app.getSelfPath('mmsi') ? app.getSelfPath('mmsi').value : app.getSelfPath('uuid');
-		vehicle.imo = app.getSelfPath('registrations.imo') ? app.getSelfPath('registrations.imo').value : undefined;
-		vehicle.callsign = app.getSelfPath('communication.callsignVhf') ? app.getSelfPath('communication.callsignVhf').value : undefined;
-		vehicle.shiptype = app.getSelfPath('design.aisShipType.id') ? app.getSelfPath('design.aisShipType.id').value : undefined;
-		vehicle.shiptype_text = app.getSelfPath('design.aisShipType.name') ? app.getSelfPath('design.aisShipType.name').value : undefined;
-		vehicle.draught = app.getSelfPath('design.draft.maximum') ? app.getSelfPath('design.draft.maximum').value : undefined;
-		vehicle.length = app.getSelfPath('design.length.overall') ? app.getSelfPath('design.length.overall').value : undefined;
-		vehicle.beam = app.getSelfPath('design.beam') ? app.getSelfPath('design.beam').value : undefined;
+		vehicle.shipname = app.getSelfPath('name') ? app.getSelfPath('name') : undefined;
+		vehicle.mmsi = app.getSelfPath('mmsi') ? app.getSelfPath('mmsi') : app.getSelfPath('uuid');
+		vehicle.imo = app.getSelfPath('registrations.imo') ? app.getSelfPath('registrations.imo') : undefined;
+		vehicle.callsign = app.getSelfPath('communication.callsignVhf') ? app.getSelfPath('communication.callsignVhf') : undefined;
+		vehicle.shiptype = app.getSelfPath('design.aisShipType.value.id') ? app.getSelfPath('design.aisShipType.value.id') : undefined;
+		vehicle.shiptype_text = app.getSelfPath('design.aisShipType.value.name') ? app.getSelfPath('design.aisShipType.value.name') : undefined;
+		vehicle.draught = app.getSelfPath('design.draft.value.maximum') ? app.getSelfPath('design.draft.value.maximum') : undefined;
+		vehicle.length = app.getSelfPath('design.length.value.overall') ? app.getSelfPath('design.length.value.overall') : undefined;
+		vehicle.beam = app.getSelfPath('design.beam.value') ? app.getSelfPath('design.beam.value') : undefined;
 		vehicle.netAIS = true;
 		//app.debug('vehicle at start',vehicle);
 		
@@ -144,7 +145,8 @@ module.exports = function (app) {
 			vehicle.course = app.getSelfPath('navigation.courseOverGroundTrue') ? app.getSelfPath('navigation.courseOverGroundTrue').value *180/Math.PI : undefined;
 			vehicle.heading = app.getSelfPath('navigation.headingTrue') ? Math.round(app.getSelfPath('navigation.headingTrue').value *180/Math.PI) : undefined;
 			vehicle.destination = app.getSelfPath('navigation.destination.commonName') ? app.getSelfPath('navigation.destination.commonName').value : undefined;
-			vehicle.eta = app.getSelfPath('navigation.destination.eta') ? app.getSelfPath('navigation.destination.eta').value : undefined;
+			vehicle.eta = app.getSelfPath('navigation.destination.eta') ? app.getSelfPath('navigation.destination.eta').value : undefined;			
+			//app.debug('navigation.datetime',app.getSelfPath('navigation.datetime'));
 			vehicle.timestamp = app.getSelfPath('navigation.datetime') ? Math.round(new Date(app.getSelfPath('navigation.datetime').value).getTime()/1000) : Math.round(new Date().getTime()/1000); 	// navigation.datetime -- строка iso-8601
 			if(vehicle.lon && vehicle.lat) return true;
 			else return false
@@ -267,6 +269,7 @@ module.exports = function (app) {
 			//app.debug('vehicle',vehicle);
 			
 			if(! options.netAISserverURIs) {
+				app.debug('Don\'t set server, bye.');
 				app.debug('options.netAISserverURIs',options.netAISserverURIs);
 				plugin.stop();
 				return;

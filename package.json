@@ -1,6 +1,6 @@
 {
   "name": "netais",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Exchange AIS-like messages via the Internet to watch position members of your private group. SignalK implementation.",
   "main": "index.js",
   "scripts": {
