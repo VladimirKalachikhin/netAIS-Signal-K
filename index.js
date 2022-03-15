@@ -272,6 +272,7 @@ module.exports = function (app) {
 				app.debug('Don\'t set server, bye.');
 				app.debug('options.netAISserverURIs',options.netAISserverURIs);
 				plugin.stop();
+				app.setPluginStatus('Plugin stopped by no netAIS servers in config.');
 				return;
 			}
 			const now = Math.round(new Date().getTime()/1000); 	// unix timestamp
@@ -308,6 +309,8 @@ module.exports = function (app) {
 						let rawData = '';
 						res.on('data', (chunk) => { rawData += chunk; });
 						res.on('end', () => {
+							app.setPluginStatus('Normal run, connections ok.');
+							//app.setPluginError('');
 							//app.debug('rawData:',rawData);
 							try {
 								let netAISdata = JSON.parse(rawData);
@@ -316,7 +319,7 @@ module.exports = function (app) {
 								// Получены данные netAIS, теперь отдадим их в SignalK
 
 								for(const vessel in netAISdata) {
-									if((now - netAISdata[vessel].timestamp) > options.noVehicleTimeout) continue; 	// протухщие и без метки времени -- не показываем
+									if((now - netAISdata[vessel].timestamp) > options.noVehicleTimeout) continue; 	// протухшие и без метки времени -- не показываем
 									const values = prepareDelta(netAISdata[vessel]);
 									//app.debug('Добавляется судно',netAISdata[vessel].shipname);
 									//app.debug('values AFTER ',values);
@@ -338,12 +341,15 @@ module.exports = function (app) {
 						});
 					}
 				}).on('error', (e) => {
-					app.debug(`Connect to netAIS server Got error: ${e.message}`);
-					if(e.message.includes(`:${options.torPort}`)){
-						app.error(`TOR not run? ${e.message}`);
+					app.debug(`Connect to netAIS server got error: ${e.message}`);
+					app.setPluginError(e.message);
+					app.setPluginStatus(`Connect to netAIS server got error, continued attempts.`);
+					if(e.message.includes(`:${options.torPort}`)){	// проблема с локальным tor'ом. Но его перезапустят?
+						//app.error(`TOR not run? ${e.message}`);
 						//app.debug(`TOR not run? ${e.message}`);
 						app.setPluginError(`TOR not run? ${e.message}`);
-						plugin.stop();
+						app.setPluginStatus('Plugin inactive by no local TOR.');
+						//plugin.stop();
 						return;
 					}
 				});
@@ -447,6 +453,41 @@ module.exports = function (app) {
 		app.debug('netAIS stopped');
 		unsubscribes.forEach(f => f());
 		unsubscribes = [];
+		// Обнулим координаты у тех пароходов, которые получены по netAIS
+		const vessels = app.getPath('vessels');
+		for( let vessel in vessels){
+			if(!(vessels[vessel].communication && vessels[vessel].communication.value && vessels[vessel].communication.value.netAIS)) continue;
+			//app.debug('vessel',vessel);
+			app.handleMessage(plugin.id, {
+				context: 'vessels.'+vessel,
+				updates: [
+					{
+						values: [
+							{
+								path: 'navigation.position',
+								value: {longitude: null, latitude: null}
+							},
+							{
+								path: 'navigation.courseOverGroundTrue',
+								value: null	// undefined тут почему-то Illegal value in delta:{"path":"navigation.courseOverGroundTrue"}
+							},
+							{
+								path: 'navigation.speedOverGround',
+								value: null	// undefined тут почему-то Illegal value in delta:{"path":"navigation.speedOverGround"}
+							},
+							{
+								path: 'navigation.headingTrue',
+								value: null	// undefined тут почему-то Illegal value in delta:{"path":"navigation.headingTrue"}
+							},
+						],
+						source: { label: plugin.id },
+						timestamp: new Date().toISOString(),
+					}
+				]
+			})
+		}		
+		stream = null;
+		app.setPluginStatus('Plugin stopped');
 	};
 
 	return plugin;
