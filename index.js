@@ -326,7 +326,7 @@ plugin.start = function (options, restartPlugin) {
 											timestamp: new Date(netAISdata[vessel].timestamp*1000).toISOString(),
 										}
 									]
-								})
+								});
 							} 	// конец цикла по пароходам в netAISdata
 							
 						} catch (e) { 	// 	облом JSON.parse

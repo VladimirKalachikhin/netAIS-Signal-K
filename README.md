@@ -53,6 +53,8 @@ It's no need if you want to be a group member only. But working TOR must be have
 Any Signal K chartplotters will show netAIS targets in the usual way.
 
 ## Support
-[Discussions](https://github.com/VladimirKalachikhin/netAIS-Signal-K/discussions/)
+[Discussions](https://github.com/VladimirKalachikhin/Galadriel-map/discussions)
 
-You can get support for netAIS software for a beer [via PayPal](https://paypal.me/VladimirKalachikhin) or [YandexMoney](https://yasobe.ru/na/galadrielmap) at [galadrielmap@gmail.com](mailto:galadrielmap@gmail.com)  
+The forum will be more lively if you make a donation [via PayPal](https://paypal.me/VladimirKalachikhin)  at [galadrielmap@gmail.com](mailto:galadrielmap@gmail.com) or at [ЮMoney](https://yasobe.ru/na/galadrielmap)
+
+[Paid personal consulting](https://kwork.ru/it-support/20093939/galadrielmap-installation-configuration-and-usage-consulting)  

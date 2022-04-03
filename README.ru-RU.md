@@ -54,6 +54,8 @@ sudo cat /var/lib/tor/hidden_service_netAIS/hostname
 Любой картплотер Signal K будет показывать цели netAIS обычным образом.
  
 ## Поддержка
-[Обсуждение](https://github.com/VladimirKalachikhin/netAIS-Signal-K/discussions/)
+[Форум](https://github.com/VladimirKalachikhin/Galadriel-map/discussions)
 
-За чашку кофе [через ЯндексДеньги](https://yasobe.ru/na/galadrielmap) или [PayPal](https://paypal.me/VladimirKalachikhin?locale.x=ru_RU) можно получить консультации по адресу [galadrielmap@gmail.com](mailto:galadrielmap@gmail.com)  
+Форум будет живее, если вы сделаете пожертвование [через PayPal](https://paypal.me/VladimirKalachikhin) по адресу [galadrielmap@gmail.com](mailto:galadrielmap@gmail.com) или на [ЮМани](https://yasobe.ru/na/galadrielmap).
+
+Вы можете получить [индивидуальную платную консультацию](https://kwork.ru/training-consulting/20093293/konsultatsii-po-ustanovke-i-ispolzovaniyu-galadrielmap) по вопросам установки и использования netAIS.
