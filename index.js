@@ -10,7 +10,7 @@ plugin.schema = { 	// при изменении схемы надо в серв�
 // The plugin schema
 	title: 'netAIS',
 	type: 'object',
-	required: ['torHost', 'torPort'],
+	required: [],
 	properties: {
 		netAISserverURIs: {
 			type: 'array',
@@ -32,7 +32,8 @@ plugin.schema = { 	// при изменении схемы надо в серв�
 					onion: {
 						type: 'string',
 						title: '.onion address of group, required ',
-						default: '2q6q4phwaduy4mly2mrujxlhpjg7el7z2b4u6s7spghylcd6bv3eqvyd.onion'
+						default: '2q6q4phwaduy4mly2mrujxlhpjg7el7z2b4u6s7spghylcd6bv3eqvyd.onion',
+						description: `This can be a real ip address if you are not using TOR.`
 					},
 				}
 			}
@@ -50,7 +51,10 @@ plugin.schema = { 	// при изменении схемы надо в серв�
 		torHost: {
 			type: 'string',
 			title: 'your TOR host',
-			default: 'localhost'
+			default: 'localhost',
+			description: `It's really just a socks5 proxy, not necessarily tor.
+			May be omitted if you are not using tor.
+			`
 		},
 		torPort: {
 			type: 'string',
@@ -75,13 +79,13 @@ plugin.schema = { 	// при изменении схемы надо в серв�
 					type: 'string',
 					title: 'your TOR .onion address for netAIS server',
 					description: `You MUST configure TOR hidden service (https://www.torproject.org/docs/tor-onion-service.html.en)
-					 to be netAIS work.\n
+					 to be netAIS work via TOR.\n
 					 Add strings "\n
 					 HiddenServiceDir /var/lib/tor/hidden_service_netAIS/\n
 					 HiddenServicePort 80 localhost:3100\n
 					 " to torrc config file and restart TOR\n
-					 see your TOR .onion address by  # cat /var/lib/tor/hidden_service_netAIS/hostname
-
+					 see your TOR .onion address by  # cat /var/lib/tor/hidden_service_netAIS/hostname\n
+					But this can be a real ip address if you are not using TOR.
 					`
 				},
 				netAISserverPort: {
@@ -108,8 +112,11 @@ plugin.start = function (options, restartPlugin) {
 	//app.debug('options',options);
 	const http = require('http');
 	const url = require('url');
-	const { SocksProxyAgent } = require('socks-proxy-agent');	
-	const agent = new SocksProxyAgent('socks5h://'+options.torHost+':'+options.torPort);
+	let agent;
+	if(options.torHost){	// если указан proxy, например -- tor
+		const { SocksProxyAgent } = require('socks-proxy-agent');	
+		agent = new SocksProxyAgent('socks5h://'+options.torHost+':'+options.torPort);
+	}
 	//app.debug('tor:',agent);
 	app.debug('netAIS client started');
 	// Сведения о себе для передачи
@@ -354,7 +361,7 @@ plugin.start = function (options, restartPlugin) {
 	unsubscribes.push(unsubscrF); 	// складываем функцию отписки в кучку, для отписки в plugin.stop
 
 	// netAIS server
-	const netAIShost = 'localhost';
+	const netAIShost = '0.0.0.0';	//
 	const netAISport = options.selfServer.netAISserverPort;
 	let netAISserverData = {};
 	
@@ -420,7 +427,7 @@ plugin.start = function (options, restartPlugin) {
 	} // end function netAISserver
 	
 	if(options.selfServer.toggle) {
-		if(options.selfServer.selfOnion){
+		if(options.selfServer.selfOnion){	// есть onion адрес
 			const server = http.createServer(netAISserver);
 			server.listen(netAISport, netAIShost, () => {
 				app.debug(`netAIS server running at http://${netAIShost}:${netAISport}/`);

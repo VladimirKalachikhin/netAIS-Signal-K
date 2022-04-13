@@ -1,3 +1,4 @@
+[Русское описание](https://github.com/VladimirKalachikhin/netAIS-Signal-K/blob/master/README.ru-RU.md)
 # netAIS Signal K plugin[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 ## v. 0.1
@@ -36,18 +37,24 @@ Use Server -> Plugin Config menu to configure plugin.
 Press Submit to save changes.
 
 ### TOR hidden service
-[Configure TOR hidden service](https://community.torproject.org/onion-services/setup/) to serve localhost:3100 (default) addres. Simplest way to it is just adding  
+If TOR is in the same computer as SignalK, [configure TOR hidden service](https://community.torproject.org/onion-services/setup/) to serve localhost:3100 (default) address. Simplest way to it is just adding  
+
 ```
 HiddenServiceDir /var/lib/tor/hidden_service_netAIS/   
 HiddenServicePort 80 localhost:3100  
 ```
+
 strings to "location-hidden services" section of `/etc/tor/torrc.`
 After restart TOR, get address you hidden service by  
 ```
 sudo cat /var/lib/tor/hidden_service_netAIS/hostname  
 ```
+
 ![hidden_server_config_screenshot](screenshots/s3.png)   
-It's no need if you want to be a group member only. But working TOR must be have.
+
+If TOR is on a different computer than SignalK, replace `localhost` with the SignalK address.
+
+It's all no need if you want to be a group member only. But a working TOR should be.
 
 ## Usage
 Any Signal K chartplotters will show netAIS targets in the usual way.

@@ -1,3 +1,4 @@
+[In English](https://github.com/VladimirKalachikhin/netAIS-Signal-K/blob/master/README.md)
 # netAIS плагин для Signal K[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 ## v. 0.1
@@ -36,18 +37,24 @@
 
 ### Скрытый сервис TOR
 
-[Настройте скрытый сервис TOR](https://community.torproject.org/onion-services/setup/) на 
-адрес localhost:3100. Самый простой способ это сделать -- это добавить строки  
+Если TOR находится на той же машине, что и SignalK, [настройте скрытый сервис TOR](https://community.torproject.org/onion-services/setup/) на 
+адрес localhost:3100. Для этого добавьте строки  
+
 ```
 HiddenServiceDir /var/lib/tor/hidden_service_netAIS/   
 HiddenServicePort 80 localhost:3100  
 ```
+
 в раздел location-hidden services" файла `/etc/tor/torrc`.  
-Перезапустите TOR и посмотрите адрес в файле /var/lib/tor/hidden_service_netAIS/hostname, например, путём   
+Перезапустите TOR и посмотрите адрес скрытого сервиса в файле /var/lib/tor/hidden_service_netAIS/hostname, например, путём   
 ```
 sudo cat /var/lib/tor/hidden_service_netAIS/hostname  
 ```
+
 ![screenshot](screenshots/s3.png)   
+
+Если TOR находится на другой машине -- укажите вместо `localhost` адрес машины с SignalK.
+
 Не нужно настраивать скрытый сервис TOR, если вы не собираетесь держать свою группу netAIS, а хотите быть только членом других групп. Но сам TOR, конечно, должен быть.
 
 ## Использование
