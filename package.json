@@ -1,13 +1,13 @@
 {
   "name": "netais",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Exchange AIS-like messages via the Internet to watch position members of your private group. SignalK implementation.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Vladimir Kalachikhin <galadrielmap@gmail.com>",
-  "license": "CC-BY-SA-4.0",
+  "license": "CC BY-NC-SA 4.0",
   "keywords": [
     "signalk-node-server-plugin",
     "signalk-category-ais"
@@ -24,11 +24,7 @@
   "funding": [
     {
       "type" : "individual",
-      "url" : "https://paypal.me/VladimirKalachikhin"
-    },
-    {
-      "type" : "individual",
-      "url" : "https://yasobe.ru/na/galadrielmap"
+      "url" : "https://sobe.ru/na/galadrielmap"
     }
   ],
   "files": [
@@ -36,5 +32,8 @@
   ],
   "dependencies": {
     "socks-proxy-agent": ">=6.0.0"
+  },
+  "signalk": {
+    "displayName": "netAIS SignalK edition"
   }
 }

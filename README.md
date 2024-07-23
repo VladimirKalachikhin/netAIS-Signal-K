@@ -1,5 +1,5 @@
-[Русское описание](https://github.com/VladimirKalachikhin/netAIS-Signal-K/blob/master/README.ru-RU.md)
-# netAIS Signal K plugin[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+[Русское описание](README.ru-RU.md)
+# netAIS Signal K plugin [![License: CC BY-NC-SA 4.0](screenshots/Cc-by-nc-sa_icon.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)
 
 ## v. 0.1
 

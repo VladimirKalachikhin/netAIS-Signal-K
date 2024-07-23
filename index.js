@@ -32,7 +32,7 @@ plugin.schema = { 	// при изменении схемы надо в серв�
 					onion: {
 						type: 'string',
 						title: '.onion address of group, required ',
-						default: '2q6q4phwaduy4mly2mrujxlhpjg7el7z2b4u6s7spghylcd6bv3eqvyd.onion',
+						default: 'eqavt5cdur7vbzoejquiwviok4tfexy32sggxdxujm75uiljqi5g27ad.onion',
 						description: `This can be a real ip address if you are not using TOR.`
 					},
 				}
@@ -122,7 +122,7 @@ plugin.start = function (options, restartPlugin) {
 	// Сведения о себе для передачи
 	var vehicle = {};
 	vehicle.shipname = app.getSelfPath('name') ? app.getSelfPath('name') : undefined;
-	vehicle.mmsi = app.getSelfPath('mmsi') ? app.getSelfPath('mmsi') : app.getSelfPath('uuid');
+	vehicle.mmsi = app.getSelfPath('mmsi') ? app.getSelfPath('mmsi') : app.getSelfPath('uuid');	// однако, uuid не назначается автоматически, и обычно его нет. И mmsi тоже нет.
 	vehicle.imo = app.getSelfPath('registrations.imo') ? app.getSelfPath('registrations.imo') : undefined;
 	vehicle.callsign = app.getSelfPath('communication.callsignVhf') ? app.getSelfPath('communication.callsignVhf') : undefined;
 	vehicle.shiptype = app.getSelfPath('design.aisShipType.value.id') ? app.getSelfPath('design.aisShipType.value.id') : undefined;
@@ -143,7 +143,10 @@ plugin.start = function (options, restartPlugin) {
 		vehicle.destination = app.getSelfPath('navigation.destination.commonName') ? app.getSelfPath('navigation.destination.commonName').value : undefined;
 		vehicle.eta = app.getSelfPath('navigation.destination.eta') ? app.getSelfPath('navigation.destination.eta').value : undefined;			
 		//app.debug('navigation.datetime',app.getSelfPath('navigation.datetime'));
-		vehicle.timestamp = app.getSelfPath('navigation.datetime') ? Math.round(new Date(app.getSelfPath('navigation.datetime').value).getTime()/1000) : Math.round(new Date().getTime()/1000); 	// navigation.datetime -- строка iso-8601, переводится в unix timestamp, в секундах
+		//app.debug('navigation.position',app.getSelfPath('navigation.position'));
+		if(app.getSelfPath('navigation.datetime')) vehicle.timestamp = Math.round(Date.parse(app.getSelfPath('navigation.datetime').value)/1000);	// navigation.datetime -- строка iso-8601, переводится в unix timestamp, в секундах
+		else if(app.getSelfPath('navigation.position')) vehicle.timestamp = Math.round(Date.parse(app.getSelfPath('navigation.position').timestamp)/1000);
+		else vehicle.timestamp = Math.round(Date.now()/1000);
 		if(vehicle.lon && vehicle.lat) return true;
 		else return false
 	} // end function updSelf
@@ -264,7 +267,7 @@ plugin.start = function (options, restartPlugin) {
 	if(!options.interval) options.interval = 2;
 	stream = stream.debounceImmediate(options.interval * 1000); 	// каждую секунду, если не указано иного
 
-	function doConnect(position) { 	// функция для обработки подписки
+	function doOnValue(position) { 	// функция для обработки подписки
 		// свежие сведения о себе
 		if(! updSelf(position)) return; 	// не будем обращаться к серверам, если у нас нет своих координат
 		//app.debug('vehicle',vehicle);
@@ -322,7 +325,7 @@ plugin.start = function (options, restartPlugin) {
 							for(const vessel in netAISdata) {
 								if((now - netAISdata[vessel].timestamp) > options.noVehicleTimeout) continue; 	// протухшие и без метки времени -- не показываем
 								const values = prepareDelta(netAISdata[vessel]);
-								//app.debug('Добавляется судно',netAISdata[vessel].shipname);
+								//app.debug('Добавляется судно',netAISdata[vessel].shipname,new Date(netAISdata[vessel].timestamp*1000).toISOString());
 								//app.debug('values AFTER ',values);
 								app.handleMessage(plugin.id, {
 									context: 'vessels.urn:mrn:imo:mmsi:'+netAISdata[vessel].mmsi,
@@ -355,9 +358,9 @@ plugin.start = function (options, restartPlugin) {
 				}
 			});
 		}
-	}; // end function doConnect
+	}; // end function doOnValue
 	
-	unsubscrF = stream.onValue(doConnect); 	// назначаем функцию для обработки событий в потоке. Результат -- функция отписки от этого события (ну вот так...)
+	unsubscrF = stream.onValue(doOnValue); 	// назначаем функцию для обработки событий в потоке. Результат -- функция отписки от этого события (ну вот так...)
 	unsubscribes.push(unsubscrF); 	// складываем функцию отписки в кучку, для отписки в plugin.stop
 
 	// netAIS server

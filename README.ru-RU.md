@@ -1,5 +1,5 @@
-[In English](https://github.com/VladimirKalachikhin/netAIS-Signal-K/blob/master/README.md)
-# netAIS плагин для Signal K[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+[In English](README.md)
+# netAIS плагин для Signal K [![License: CC BY-NC-SA 4.0](screenshots/Cc-by-nc-sa_icon.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)
 
 ## v. 0.1
 Обмен AIS-подобными сообщениями с координатами и сопутствующей информацией через Интрнет между участниками выделенной частной группы. Для взаимодействия не требуется интернет-сервер с реальным адресом.
