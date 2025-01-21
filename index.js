@@ -209,6 +209,14 @@ plugin.start = function (options, restartPlugin) {
 				value: vessel.status
 			},
 			{
+				path: 'navigation.state_text',
+				value: vessel.status_text
+			},
+			{
+				path: 'navigation.safety_related_text',
+				value: vessel.safety_related_text
+			},
+			{
 				path: 'navigation.destination',
 				value: {commonName : vessel.destination, eta : vessel.eta}
 			},
@@ -319,7 +327,7 @@ plugin.start = function (options, restartPlugin) {
 						try {
 							let netAISdata = JSON.parse(rawData);
 							delete netAISdata[vehicle.mmsi]; 	// я сам есть в полученных
-							//app.debug(netAISdata);
+							//app.debug('Получены данные netAIS:',netAISdata);
 							// Получены данные netAIS, теперь отдадим их в SignalK
 
 							for(const vessel in netAISdata) {
