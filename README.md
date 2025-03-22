@@ -1,10 +1,10 @@
 [Русское описание](README.ru-RU.md)
 # netAIS Signal K plugin [![License: CC BY-NC-SA 4.0](screenshots/Cc-by-nc-sa_icon.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)
 
-## v. 0.1
+## version 1.
 
 Exchange AIS-like messages via the Internet to watch position members of your private group. No need for a dedicated server with a real IP address.  
-Suitable for fishing, regatta and collective water recreation.  
+Suitable for fishing, regatta, collective trips and water recreation.  
 
 ![scheme](screenshots/art.png)   
 Software use [TOR](https://en.wikipedia.org/wiki/Tor_(network)) as a communication environment, so it works smoothly via mobile internet and public wi-fi.
@@ -12,11 +12,14 @@ Software use [TOR](https://en.wikipedia.org/wiki/Tor_(network)) as a communicati
 ## Features
 * Service one private group.
 * Membership in any number of groups.
+* Broadcast to a group: position, standard status (under way, at anchor, etc.), free status text, destination, alarms and MOB. Of course, non-standard features for AIS are not displayed by the usual AIS tools, but the [GaladrielMap](http://galadrielmap.hs-yachten.at/) displays everything.
 
 ## Technical
-Plugin includes a client and a server for one private group. The server must be configured as a TOR hidden service.  
+Plugin includes a client and a server for one private group. The server can be configured as a TOR hidden service.  
 You must get .onion address of this hidden service in any way - by email, SMS or pigeon post, and configure the client with it.  
 The client calls to the server with spatial and other info in AIS-like format. Server return info about all of the group members.  
+
+Using the TOR as a transport ensures simplicity and security. However, the system can work over mesh networks (as the Yggdrasil, for example) or over the real Internet. In this case, it is necessary to take care of security by conventional methods.
 
 ## Demo
 Public group for testing:  
